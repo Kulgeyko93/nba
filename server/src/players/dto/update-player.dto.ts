@@ -1,4 +1,5 @@
 import { Field, InputType } from '@nestjs/graphql';
+import { Team } from 'src/teams/entities/team.entity';
 
 @InputType()
 export class UpdatePlayerDto {

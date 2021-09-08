@@ -1,6 +1,12 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { Team } from 'src/teams/entities/team.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 @ObjectType()
@@ -50,10 +56,10 @@ export class Player {
   position: string;
 
   @Column()
-  @Field()
+  @Field(() => Int)
   teamId: number;
 
   @ManyToOne(() => Team, (team) => team.players)
   @Field(() => Team)
-  team: string;
+  team: Team;
 }

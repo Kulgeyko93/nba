@@ -25,7 +25,10 @@ export class Team {
   @Field({ nullable: true })
   description: string;
 
-  @OneToMany(() => Player, (player) => player.team)
-  @Field(() => Player)
-  players: [Player];
+  @OneToMany(() => Player, (player) => player.team, {
+    cascade: true,
+    nullable: true,
+  })
+  @Field(() => [Player], { nullable: true })
+  players: Player[];
 }

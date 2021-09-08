@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, Table } from 'typeorm';
+import { Repository } from 'typeorm';
 import { CreateTeamInput } from './dto/create-team.input';
 import { UpdateTeamInput } from './dto/update-team.input';
 import { Team } from './entities/team.entity';
@@ -8,15 +8,17 @@ import { Team } from './entities/team.entity';
 @Injectable()
 export class TeamsService {
   constructor(
-    @InjectRepository(Table) private readonly teamRepository: Repository<Team>,
+    @InjectRepository(Team) private readonly teamRepository: Repository<Team>,
   ) {}
 
   async create(createTeamInput: CreateTeamInput) {
     const newTeam = await this.teamRepository.create(createTeamInput);
+    newTeam.players = [];
     return await this.teamRepository.save(newTeam);
   }
 
   async findAll() {
+    const aa = await this.teamRepository.find();
     return await this.teamRepository.find();
   }
 

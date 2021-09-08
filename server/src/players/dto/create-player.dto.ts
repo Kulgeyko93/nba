@@ -1,4 +1,5 @@
-import { Field, InputType } from '@nestjs/graphql';
+import { Field, InputType, Int } from '@nestjs/graphql';
+import { Team } from 'src/teams/entities/team.entity';
 
 @InputType()
 export class CreatePlayerDto {
@@ -31,4 +32,10 @@ export class CreatePlayerDto {
 
   @Field()
   position: string;
+
+  @Field((type) => Int)
+  teamId: number;
+
+  // @Field()
+  // team: Team;
 }

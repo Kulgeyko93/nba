@@ -19,6 +19,7 @@ import { TeamsModule } from './teams/teams.module';
       database: process.env.DB_NAME,
       entities: [Player, Team],
       synchronize: true,
+      autoLoadEntities: true,
     }),
     GraphQLModule.forRoot({
       autoSchemaFile: true,
