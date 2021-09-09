@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Player } from './players/entities/player.entity';
 import { PlayersModule } from './players/players.module';
@@ -20,9 +19,6 @@ import { TeamsModule } from './teams/teams.module';
       entities: [Player, Team],
       synchronize: true,
       autoLoadEntities: true,
-    }),
-    GraphQLModule.forRoot({
-      autoSchemaFile: true,
     }),
     PlayersModule,
     TeamsModule,

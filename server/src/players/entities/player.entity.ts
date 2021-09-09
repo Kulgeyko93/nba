@@ -1,4 +1,3 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { Team } from 'src/teams/entities/team.entity';
 import {
   Column,
@@ -9,57 +8,44 @@ import {
 } from 'typeorm';
 
 @Entity()
-@ObjectType()
 export class Player {
   @PrimaryGeneratedColumn()
-  @Field((type) => Int)
   id: number;
 
   @Column()
-  @Field()
   name: string;
 
   @Column()
-  @Field()
   surname: string;
 
   @Column()
-  @Field()
   birthday: string;
 
   @Column()
-  @Field()
   height: number;
 
   @Column()
-  @Field()
   weight: number;
 
   @Column({ nullable: true })
-  @Field({ nullable: true })
   beforNBA?: string;
 
   @Column()
-  @Field()
   gameNumber: number;
 
   @Column()
-  @Field()
   experienceInNba: number;
 
   @Column()
-  @Field()
   countryOfBirth: string;
 
   @Column()
-  @Field()
   position: string;
 
   @Column()
-  @Field(() => Int)
   teamId: number;
 
-  @ManyToOne(() => Team, (team) => team.players)
-  @Field(() => Team)
+  @ManyToOne((type) => Team, (team) => team.players)
+  @JoinColumn({ name: 'tesmId' })
   team: Team;
 }

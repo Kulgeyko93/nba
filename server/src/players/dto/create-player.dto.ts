@@ -1,41 +1,36 @@
-import { Field, InputType, Int } from '@nestjs/graphql';
-import { Team } from 'src/teams/entities/team.entity';
+import { Column } from 'typeorm';
 
-@InputType()
 export class CreatePlayerDto {
-  @Field()
+  @Column()
   name: string;
 
-  @Field()
+  @Column()
   surname: string;
 
-  @Field()
+  @Column()
   birthday: string;
 
-  @Field()
+  @Column()
   height: number;
 
-  @Field()
+  @Column()
   weight: number;
 
-  @Field({ nullable: true })
-  beforNBA?: string;
+  @Column({ nullable: true })
+  beforeNba?: string;
 
-  @Field()
+  @Column()
   gameNumber: number;
 
-  @Field()
+  @Column()
   experienceInNba: number;
 
-  @Field()
+  @Column()
   countryOfBirth: string;
 
-  @Field()
+  @Column()
   position: string;
 
-  @Field((type) => Int)
+  @Column()
   teamId: number;
-
-  // @Field()
-  // team: Team;
 }

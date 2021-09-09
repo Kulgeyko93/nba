@@ -1,35 +1,38 @@
-import { Field, InputType } from '@nestjs/graphql';
-import { Team } from 'src/teams/entities/team.entity';
+import { PartialType } from '@nestjs/swagger';
+import { Column } from 'typeorm';
+import { CreatePlayerDto } from './create-player.dto';
 
-@InputType()
-export class UpdatePlayerDto {
-  @Field({ nullable: true })
-  name: string;
+export class UpdatePlayerDto extends PartialType(CreatePlayerDto) {
+  @Column()
+  name?: string;
 
-  @Field({ nullable: true })
-  surname: string;
+  @Column()
+  surname?: string;
 
-  @Field({ nullable: true })
-  birthday: string;
+  @Column()
+  birthday?: string;
 
-  @Field({ nullable: true })
-  height: number;
+  @Column()
+  height?: number;
 
-  @Field({ nullable: true })
-  weight: number;
+  @Column()
+  weight?: number;
 
-  @Field({ nullable: true })
-  beforNBA: string;
+  @Column({ nullable: true })
+  beforeNba?: string;
 
-  @Field({ nullable: true })
-  gameNumber: number;
+  @Column()
+  gameNumber?: number;
 
-  @Field({ nullable: true })
+  @Column()
   experienceInNba?: number;
 
-  @Field({ nullable: true })
-  countryOfBirth: string;
+  @Column()
+  countryOfBirth?: string;
 
-  @Field({ nullable: true })
-  position: string;
+  @Column()
+  position?: string;
+
+  @Column()
+  teamId?: number;
 }

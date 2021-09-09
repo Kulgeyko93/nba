@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateTeamInput } from './dto/create-team.input';
-import { UpdateTeamInput } from './dto/update-team.input';
+import { CreateTeamDto } from './dto/create-team.dto';
+import { UpdateTeamDto } from './dto/update-team.dto';
 import { Team } from './entities/team.entity';
 
 @Injectable()
@@ -10,39 +10,34 @@ export class TeamsService {
   constructor(
     @InjectRepository(Team) private readonly teamRepository: Repository<Team>,
   ) {}
-
-  async create(createTeamInput: CreateTeamInput) {
-    const newTeam = await this.teamRepository.create(createTeamInput);
-    newTeam.players = [];
-    return await this.teamRepository.save(newTeam);
+  async create(createTeamDto: any) {
+    const team = await this.teamRepository.create(createTeamDto);
+    return await this.teamRepository.save(team);
   }
 
   async findAll() {
-    const aa = await this.teamRepository.find();
-    return await this.teamRepository.find();
+    return await this.teamRepository.find({ relations: ['players'] });
   }
 
   async findOne(id: number) {
-    const team = await this.teamRepository.findOne(id);
+    const team = await this.teamRepository.findOne(id, {
+      relations: ['players'],
+    });
 
     if (!team) throw new Error('Team not found');
 
     return team;
   }
 
-  async update(id: number, updateTeamInput: UpdateTeamInput) {
+  async update(id: number, updateTeamDto: UpdateTeamDto) {
     const team = await this.findOne(id);
+    const updateTeam = Object.assign(team, updateTeamDto);
 
-    if (!team) throw new Error('Team not found');
-
-    const updatedTeam = Object.assign({}, team, updateTeamInput);
-    return await this.teamRepository.save(updatedTeam);
+    return await this.teamRepository.save(updateTeam);
   }
 
   async remove(id: number) {
-    const team = this.findOne(id);
-
-    if (!team) throw new Error('Team not found');
+    this.findOne(id);
     await this.teamRepository.delete(id);
     return true;
   }
