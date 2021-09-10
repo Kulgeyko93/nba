@@ -1,9 +1,11 @@
+import { Coache } from 'src/coaches/entities/coache.entity';
 import { Player } from 'src/players/entities/player.entity';
 import {
   Column,
   Entity,
   JoinColumn,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -18,8 +20,11 @@ export class Team {
   @Column()
   dateCreation: string;
 
-  @Column()
-  coach: string;
+  @OneToOne((type) => Coache, (coach: Coache) => coach.team, {
+    cascade: true,
+  })
+  @JoinColumn()
+  coach?: Coache;
 
   @Column({ nullable: true })
   description: string;
@@ -27,12 +32,6 @@ export class Team {
   @OneToMany((type) => Player, (player: Player) => player.team, {
     cascade: true,
   })
+  @JoinColumn()
   players?: Player[];
-
-  addPlayer(player: Player) {
-    if (this.players === null) {
-      this.players = Array<Player>();
-    }
-    this.players.push(player);
-  }
 }

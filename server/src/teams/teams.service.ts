@@ -16,7 +16,7 @@ export class TeamsService {
   }
 
   async findAll() {
-    return await this.teamRepository.find({ relations: ['players'] });
+    return await this.teamRepository.find({ relations: ['players', 'coach'] });
   }
 
   async findOne(id: number) {
