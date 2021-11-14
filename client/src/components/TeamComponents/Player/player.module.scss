@@ -1,0 +1,85 @@
+
+.player__wrapper{
+  width: 100%;
+  min-height: 500px;
+  display: flex;
+  // flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+
+  background-image: url('https://storge.pic2.me/c/1360x800/699/fon%20(59).jpg');
+  background-size: 100% 100%;
+  color: #fff;
+}
+
+.player__wrapper_reverse{
+  // display: flex;
+  flex-direction: row-reverse;
+}
+
+.player__img{
+  width: 30%;
+  img{
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.player__game_number{
+  width: 10%;
+  font-size: 4rem;
+}
+
+.player{
+  width: 50%;
+  // padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  .player__name{
+    margin-bottom: 40px;
+    // font-family: 'Inter-Regular';
+    font-size: 2.5rem;
+    text-transform: uppercase;
+  }
+
+  .player__info{
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .player__fg, .player__3fg, .player__rebound, .player__assists{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+  
+    }
+
+
+  }
+
+  .player__about{
+    
+    margin-bottom: 20px;
+    .about_title{
+      margin-bottom: 5px;
+    }
+    .about_content{
+      text-align: justify;
+      font-size: 1rem;
+    }
+  }
+}
+
+
+.player__text, .about_title{
+  text-transform: uppercase;
+  font-size: 1.1rem;
+}
